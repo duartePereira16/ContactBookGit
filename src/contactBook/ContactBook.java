@@ -64,7 +64,8 @@ public class ContactBook {
         boolean found = false;
         Contact contact = null;
         int i = 0;
-        while (!found) {
+        if (counter == 0) return null;
+        while (!found && i < counter) {
             if (contacts[i].getPhone() == phone){
                 contact = contacts[i];
                 found = true;
@@ -74,6 +75,14 @@ public class ContactBook {
         return contact;
     }
 
+    public boolean hasEqualPhones() {
+        for (int i = 0; i < counter - 1; i++) {
+            for (int j = i + 1; j < counter; j++)
+                if (contacts[i].getPhone() == contacts[j].getPhone())
+                    return true;
+        }
+        return false;
+    }
 
     private int searchIndex(String name) {
         int i = 0;
