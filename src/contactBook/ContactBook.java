@@ -1,6 +1,7 @@
 package contactBook;
 
-import contactBook.Contact;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ContactBook {
     static final int DEFAULT_SIZE = 100;
@@ -64,7 +65,7 @@ public class ContactBook {
         boolean found = false;
         Contact contact = null;
         int i = 0;
-        if (counter == 0) return null;
+
         while (!found && i < counter) {
             if (contacts[i].getPhone() == phone){
                 contact = contacts[i];
@@ -76,10 +77,12 @@ public class ContactBook {
     }
 
     public boolean hasEqualPhones() {
-        for (int i = 0; i < counter - 1; i++) {
-            for (int j = i + 1; j < counter; j++)
-                if (contacts[i].getPhone() == contacts[j].getPhone())
-                    return true;
+        Set<Integer> phoneSet = new HashSet<>();
+        for (int i = 0; i< counter; i++){
+            if(phoneSet.contains(contacts[i].getPhone())){
+                return true;
+            }
+            phoneSet.add(contacts[i].getPhone());
         }
         return false;
     }
